@@ -1,0 +1,16 @@
+967a1de3cea2badbff6cfec1323aa931 *ChangeLog
+89ae899d8b49e8c7ebf2cbd1f2b08acf *DESCRIPTION
+46346f2091b268042d86f4b89035ee87 *NAMESPACE
+8ed9fe5a86240d12212fbf392a9341bd *R/bmn.R
+98efcfd7a0f5099444642c514d6d1774 *R/data.R
+7f13f7581cfe3cf5aefbd84951090c43 *R/dissplot.R
+47de30b65e60476789e2a735f98324a7 *R/f2calc.R
+7c5741a05bbe1848a3750b7612b743a3 *R/hgp.R
+69043cd86390aabbf75c7d8831e11ee7 *data/dis_data.rda
+bf932ce6ce26eab775fb727518dc35f4 *inst/logo/logo.R
+b922b49799ced087a925fd6baae78c67 *man/bmn.Rd
+b02f1a4df920cc5498b0c55f905a4143 *man/dis_data.Rd
+e503cb22e9154fe879425d5383073526 *man/dissplot.Rd
+866928d3d7d955840377960f97ecebd6 *man/f2calc.Rd
+d9daa39f8d864508f0e78918c9cfa7e3 *man/figures/logo.png
+95ebc7871a3d5e08b7bb426625c8b54d *man/hgp.Rd
