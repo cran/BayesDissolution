@@ -5,7 +5,9 @@
 #' @param dis_data A data frame containing the dissolution data. The first column of the data frame should denote
 #'  the group labels identifying whether a given dissolution belongs to the "reference" or "test" formulation group.
 #'  For a given dissolution run, the remaining columns of the data frame contains the individual run's dissolution
-#'  measurements sorted in time.
+#'  measurements sorted in time. Alternatively, the user may provide a data object of class dis_data containing the
+#'  dissolution data. See the \code{make_dis_data()} function for the particular structure of the data object.
+#' @param B A positive integer specifying the number of posterior samples to draw. By default \code{B} is set to 10000.
 #' @param locs A vector in ascending order that corresponds to each time point the dissolution data was measured at.
 #' @param B A positive integer specifying the number of posterior samples to draw. By default \code{B} is set to 10000.
 #' @param n_interp An integer value specifying the number of time points to interpolate at. This sets the interploated points to be to \code{seq(1st time point, last time point, length = n_interp)}.
@@ -112,6 +114,9 @@
 #' @export
 hgp <- function(dis_data, locs, B = 1000, n_interp = 30, control = list(), adaptive = FALSE){
 
+  if(class(dis_data)[1] == "dis_data"){
+    dis_data <- data.frame(rbind(data.frame(group = "Reference", dis_data$yRef), data.frame(group = "Test", dis_data$yTest)))
+  }
   if(B <= 0 | !is.numeric(B)){
     stop("B must be a positive integer.")
   }else if(!is.data.frame(dis_data)){

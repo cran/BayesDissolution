@@ -5,7 +5,8 @@
 #' @param dis_data A data frame containing the dissolution data. The first column of the data frame should denote
 #'  the group labels identifying whether a given dissolution belongs to the "reference" or "test" formulation group.
 #'  For a given dissolution run, the remaining columns of the data frame contains the individual run's dissolution
-#'  measurements sorted in time.
+#'  measurements sorted in time. Alternatively, the user may provide a data object of class dis_data containing the
+#'  dissolution data. See the \code{make_dis_data()} function for the particular structure of the data object.
 #' @param B A positive integer specifying the number of posterior samples to draw. By default \code{B} is set to 10000.
 #' @return The function returns a list of B posterior samples for the following parameters:
 #' \itemize{
@@ -52,6 +53,9 @@
 #' @export
 bmn <- function(dis_data, B = 10000){
 
+  if(class(dis_data)[1] == "dis_data"){
+    dis_data <- data.frame(rbind(data.frame(group = "Reference", dis_data$yRef), data.frame(group = "Test", dis_data$yTest)))
+  }
   if(B <= 0 | !is.numeric(B)){
     stop("B must be a positive integer.")
   }else if(!is.data.frame(dis_data)){
@@ -72,17 +76,8 @@ bmn <- function(dis_data, B = 10000){
     Ybar_R <- apply(dat_R, 2, mean)
     Ybar_T <- apply(dat_T, 2, mean)
 
-    anoms <- as.matrix(t(t(dat_R) - Ybar_R))
-    S2_R <- matrix(0, nlocs, nlocs)
-    for(i in 1:nreps){
-      S2_R <- S2_R + (anoms[i,]) %*% t(anoms[i,])
-    }
-
-    anoms <- as.matrix(t(t(dat_T) - Ybar_T))
-    S2_T <- matrix(0, nlocs, nlocs)
-    for(i in 1:nreps){
-      S2_T <- S2_T + (anoms[i,]) %*% t(anoms[i,])
-    }
+    S2_R <- stats::cov(dat_R) * (nreps - 1)
+    S2_T <- stats::cov(dat_T) * (nreps - 1)
 
     nrun <- B
     f2 <- rep(NA, nrun)
@@ -94,10 +89,10 @@ bmn <- function(dis_data, B = 10000){
     for(i in 1:nrun){
 
       V_R <- MCMCpack::riwish(nreps - 1, S2_R)
-      mu_R <- mnormt::rmnorm(1, Ybar_R, V_R)
+      mu_R <- mnormt::rmnorm(1, Ybar_R, V_R / nreps)
 
       V_T <- MCMCpack::riwish(nreps - 1, S2_T)
-      mu_T <- mnormt::rmnorm(1, Ybar_T, V_T)
+      mu_T <- mnormt::rmnorm(1, Ybar_T, V_T / nreps)
 
       delta[i] <- max(abs(mu_R - mu_T))
       f2[i] <- 50 * log10(1 / sqrt(1 + (1 / length(mu_R)) * sum((mu_R - mu_T)^2)) * 100)

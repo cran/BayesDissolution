@@ -1,4 +1,12 @@
+0.2.0 (14 February 2024)
+-----
+* Updated the bmn function to fix an error in the posterior
+* Added additional functions for calculating credible/confidence intervals for f2
+* New plotting function that uses ggplot2
+* Helper functions added for processing results and creating dis_data object class
+* Added a Shiny application triggered by runExample()
+
+
 0.1.0 (17 August 2022)
 -----
-
 * Package is published

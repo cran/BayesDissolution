@@ -23,7 +23,8 @@ dissplot(
 \item{dis_data}{A data frame containing the dissolution data. The first column of the data frame should denote
 the group labels identifying whether a given dissolution belongs to the "reference" or "test" formulation group.
 For a given dissolution run, the remaining columns of the data frame contains the individual run's dissolution
-measurements sorted in time.}
+measurements sorted in time. Alternatively, the user may provide a data object of class dis_data containing the
+dissolution data. See the \code{make_dis_data()} function for the particular structure of the data object.}
 
 \item{tp}{An optional vector of time points at which the dissolution data is measured at.}
 

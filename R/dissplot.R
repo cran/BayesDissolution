@@ -5,7 +5,8 @@
 #' @param dis_data A data frame containing the dissolution data. The first column of the data frame should denote
 #'  the group labels identifying whether a given dissolution belongs to the "reference" or "test" formulation group.
 #'  For a given dissolution run, the remaining columns of the data frame contains the individual run's dissolution
-#'  measurements sorted in time.
+#'  measurements sorted in time. Alternatively, the user may provide a data object of class dis_data containing the
+#'  dissolution data. See the \code{make_dis_data()} function for the particular structure of the data object.
 #' @param tp An optional vector of time points at which the dissolution data is measured at.
 #' @param pch A vector of two elements specifying the plotting character to use for each group. If only one value is passed then the plotting character is the same for both groups.
 #' @param color  A vector of two elements specifying the color in the plot to associate with each group. If only one value is passed then the color choice is the same for both groups.
@@ -27,6 +28,9 @@
 dissplot <- function(dis_data, tp = NULL, pch = c(19, 17), color = c("gray65", "black"), groups = c("Reference", "Test"), legend_location = "bottomright",
                      xlab = "Time Points", ylab = "Percentage Dissolved", mean = FALSE, var = FALSE, var_label = TRUE, ...){
 
+  if(class(dis_data)[1] == "dis_data"){
+    dis_data <- data.frame(rbind(data.frame(group = "Reference", dis_data$yRef), data.frame(group = "Test", dis_data$yTest)))
+  }
   if(!is.data.frame(dis_data)){
     stop("The dissolution data must be stored in a data frame.")
   }else if(length(unique(dis_data[,1])) != 2){
