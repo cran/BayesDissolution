@@ -1,6 +1,6 @@
 Package: BayesDissolution
 Title: Bayesian Models for Dissolution Testing
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     c(person(given = "Tony",
            family = "Pourmohamad",
@@ -8,7 +8,10 @@ Authors@R:
            email = "tpourmohamad@gmail.com"),
       person(given = "Steven",
            family = "Novick",
-           role = "ctb"))
+           role = "aut"),
+      person(given = "Robert",
+           family = "Richardson",
+           role = "aut"))
 Description: Fits Bayesian models (amongst others) to dissolution data sets that can be used for dissolution testing. The package was originally constructed to include only the Bayesian models outlined in Pourmohamad et al. (2022) <doi:10.1111/rssc.12535>. However, additional Bayesian and non-Bayesian models (based on bootstrapping and generalized pivotal quanties) have also been added. More models may be added over time.
 License: GPL-2
 Encoding: UTF-8
@@ -18,9 +21,10 @@ Imports: coda, geoR, MCMCpack, mnormt, pscl, shiny, stats
 Depends: R (>= 2.10)
 Suggests: ggplot2, scales
 NeedsCompilation: no
-Packaged: 2024-02-15 21:44:25 UTC; pourmoht
+Packaged: 2024-04-30 19:05:33 UTC; pourmoht
 Author: Tony Pourmohamad [aut, cre],
-  Steven Novick [ctb]
+  Steven Novick [aut],
+  Robert Richardson [aut]
 Maintainer: Tony Pourmohamad <tpourmohamad@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-02-15 22:50:05 UTC
+Date/Publication: 2024-04-30 19:20:02 UTC

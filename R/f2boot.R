@@ -1,6 +1,6 @@
-#' Calculation of a wild bootstrap 100*level% confidence interval for the F2 parameter
+#' Calculation of a bootstrap 100*level% confidence interval for the F2 parameter
 #'
-#' This function calculates a 100*level% confidence interval for the F2 parameter using wild bootstrap
+#' This function calculates a 100*level% confidence interval for the F2 parameter using a nonparametric bootstrap
 #'
 #' @param dis_data A data frame containing the dissolution data. The first column of the data frame should denote
 #' the group labels identifying whether a given dissolution belongs to the "reference" or "test" formulation group.
@@ -22,7 +22,7 @@
 #' @export
 f2boot <- function(dis_data, level = 0.9, B = 1000, ci.type = c("quantile", "HPD"), get.dist = FALSE){
 
-  ## Wild bootstrap of f2 and bias-corrected f2
+  ## Nonparametric bootstrap of f2 and bias-corrected f2
   if(is.data.frame(dis_data)){
     X <- cbind(2-(dis_data[,1] == dis_data[1,1]), dis_data[-1])
     names(X)[1] <- "Group"

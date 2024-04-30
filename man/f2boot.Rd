@@ -2,7 +2,7 @@
 % Please edit documentation in R/f2boot.R
 \name{f2boot}
 \alias{f2boot}
-\title{Calculation of a wild bootstrap 100*level\% confidence interval for the F2 parameter}
+\title{Calculation of a bootstrap 100*level\% confidence interval for the F2 parameter}
 \usage{
 f2boot(
   dis_data,
@@ -31,7 +31,7 @@ dissolution data. See the \code{make_dis_data()} function for the particular str
 The function returns a 100*level\% confidence interval for the F2 parameter calculated from the observed dissolution data.
 }
 \description{
-This function calculates a 100*level\% confidence interval for the F2 parameter using wild bootstrap
+This function calculates a 100*level\% confidence interval for the F2 parameter using a nonparametric bootstrap
 }
 \note{
 Use the \code{plotdiss()} or \code{ggplotdiss()} function to visually check if it's appropriate to calculate the f2 statistic.
